@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <link rel="shortcut icon" href="icon.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #283c86, #45a247);
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            margin: 10px;
+            padding: 20px;
+            height: fit-content;
+            width: fit-content;
+            border: 3px solid #fff;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background-size: 400% 400%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .output {
+            padding-right: 10px;
+            width: auto;
+            height: 68px;
+            border: 2px solid #fff;
+            margin-bottom: 10px;
+            color: white;
+            background: #1a202c;
+            font-size: 24px;
+            text-align: right;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .input {
+            padding: 20px;
+            width: 90%;
+            height: fit-content;
+            border: 2px solid #fff;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 5px;
+        }
+
+        .input:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            25% {
+                background-position: 100% 50%;
+            }
+
+            50% {
+                background-position: 0% 50%;
+            }
+
+            75% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .btn {
+            height: 50px;
+            width: 50px;
+            margin: 10px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #3a3f51;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .special-btn {
+            background-color: #ff5722;
+
+            &:hover {
+                background-color: #ff784e;
+            }
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .container {
+                width: fit-content;
+                padding: 10px;
+            }
+
+            .output {
+                font-size: 20px;
+            }
+
+            .input {
+                width: 100%;
+            }
+
+            .btn {
+                height: 45px;
+                width: 45px;
+                font-size: 16px;
+                margin: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+            }
+
+            .container {
+                width: fit-content;
+                padding: 10px;
+            }
+
+            .output {
+                font-size: 100%;
+                padding: 15px;
+            }
+
+            .input {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .btn {
+                height: 40px;
+                width: 40px;
+                font-size: 14px;
+                margin: 4px;
+            }
+
+            .btn:nth-child(4n) {
+                width: 60px;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container {
+                width: fit-content;
+                min-width: 0;
+                padding: 15px;
+            }
+
+            .output {
+                font-size: 22px;
+            }
+
+            .input {
+                width: fit-content;
+            }
+
+            .btn {
+                height: 45px;
+                width: 45px;
+                font-size: 16px;
+                margin: 5px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                width: fit-content;
+            }
+
+            .output {
+                font-size: 28px;
+            }
+
+            .input {
+                width: fit-content;
+            }
+
+            .btn {
+                height: 60px;
+                width: 60px;
+                font-size: 20px;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+
+        <div class="container">
+            <div class="output">
+                <p id="output"></p>
+            </div>
+            <div class="input">
+                <button onclick="removeAll()" class="btn special-btn" id="ac">AC</button>
+                <button onclick="displayPercentage()" class="btn special-btn" id="percent">%</button>
+                <button onclick="removeChar()" class="btn special-btn " id="back">⌫</button>
+                <button onclick="displayColor()" class="btn special-btn" id="power">⏻</button> <br>
+
+                <button onclick="displayOne()" class="btn" id="one">1</button>
+                <button onclick="displayTwo()" class="btn" id="two">2</button>
+                <button onclick="displayThree()" class="btn" id="three">3</button>
+                <button onclick="displayDivsion()" class="btn special-btn" id="division">➗</button> <br>
+                <button onclick="displayFour()" class="btn" id="four">4</button>
+                <button onclick="displayFive()" class="btn" id="five">5</button>
+                <button onclick="displaySix()" class="btn" id="six">6</button>
+                <button onclick="displayMul()" class="btn special-btn " id="multiply">✖️</button> <br>
+                <button onclick="displaySeven()" class="btn" id="seven">7</button>
+                <button onclick="displayEight()" class="btn" id="eight">8</button>
+                <button onclick="displayNine()" class="btn" id="nine">9</button>
+                <button onclick="displaySubtract()" class="btn special-btn " id="subtract">➖</button> <br>
+                <button onclick="displayZero()" class="btn" id="zero">0</button>
+                <button onclick="displayDot()" class="btn" id="back">•</button>
+                <button onclick="displayEqual()" class="btn special-btn " id="equal">🟰</button>
+                <button onclick="displayPlus()" class="btn special-btn " id="plus">➕</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        let One = document.getElementById("one")
+        let Two = document.getElementById("two")
+        let Three = document.getElementById("three")
+        let Four = document.getElementById("four")
+        let five = document.getElementById("five")
+        let six = document.getElementById("six")
+        let seven = document.getElementById("seven")
+        let eight = document.getElementById("eight")
+        let nine = document.getElementById("nine")
+        let zero = document.getElementById("zero")
+        let plus = document.getElementById("plus")
+        let subtract = document.getElementById("subtract")
+        let multiply = document.getElementById("multiply")
+        let division = document.getElementById("division")
+        let equal = document.getElementById("equal")
+        let back = document.getElementById("back")
+        let output = document.getElementById("output")
+        let power = document.getElementById("power")
+
+        function displayOne() {
+            output.innerHTML += 1
+        }
+
+        function displayTwo() {
+            output.innerHTML += 2
+        }
+
+        function displayThree() {
+            output.innerHTML += 3
+        }
+
+        function displayFour() {
+            output.innerHTML += 4
+        }
+
+        function displayFive() {
+            output.innerHTML += 5
+        }
+
+        function displaySix() {
+            output.innerHTML += 6
+        }
+
+        function displaySeven() {
+            output.innerHTML += 7
+        }
+
+        function displayEight() {
+            output.innerHTML += 8
+        }
+
+        function displayNine() {
+            output.innerHTML += 9
+        }
+
+        function displayZero() {
+            output.innerHTML += 0
+        }
+
+        function displayPlus() {
+            output.innerHTML += "+"
+        }
+
+        function displaySubtract() {
+            output.innerHTML += "-"
+        }
+
+        function displayMul() {
+            output.innerHTML += "×"
+        }
+
+        function displayDivsion() {
+            output.innerHTML += "÷"
+        }
+
+        function removeChar() {
+            output.innerText = output.innerText.slice(0, -1);
+        }
+
+        function displayDot() {
+            output.innerText += ".";
+        }
+
+
+
+        function removeAll() {
+            output.innerText = ""
+        }
+
+
+        function displayPercentage() {
+            output.innerText += "%"
+        }
+
+        let clickCount = 0;
+
+        function displayColor() {
+            const powerButton = document.getElementById('power');
+            clickCount++;
+
+            if (clickCount % 2 !== 0) {
+                powerButton.style.color = 'red';
+            } else {
+                powerButton.style.color = 'black';
+                output.innerText = ""
+
+            }
+        }
+
+        function displayEqual() {
+            let x = output.innerText;
+            console.log("User entered expression:", x);
+            try {
+                let result = eval(x.replace(/×/g, '*').replace(/÷/g, '/'));
+                output.innerText = result;
+            } catch (error) {
+                output.innerText = "Error";
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
